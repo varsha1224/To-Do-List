@@ -1,0 +1,76 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@300&family=Libre+Baskerville&family=Pacifico&display=swap" rel="stylesheet">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <% const today = new Date(); %>
+            <% const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' }; %>
+            <% const formattedDate = new Intl.DateTimeFormat('en-US', options).format(today); %>
+            
+            <%= formattedDate %> </h1>
+        <div class="box">
+            <form class="todo-form" action="/submit" method="post">
+                <input type="text" class="todo-input" name="task" placeholder="Add a new task" required>
+                <button type="submit" class="add-input">+</button>
+            </form>
+            <ul id="todo-list">
+                <!-- To-Do items will be dynamically added here -->
+                <% for (var i = 0; i < tasks.length; i++){ %>
+                    <li>
+                        <div class="taskBox">
+                            <span class="taskText"><%= tasks[i] %></span>
+                        </div>
+                        <button class="remove-button">Remove</button>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const todoForm = document.querySelector('.todo-form');
+                const todoList = document.getElementById('todo-list');
+
+                todoForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const taskInput = document.querySelector('.todo-input');
+                    const task = taskInput.value.trim();
+
+                    if (task !== '') {
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `
+                            <div class="taskBox">
+                                <span class="taskText">${task}</span>
+                            </div>
+                            <button class="remove-button">Remove</button>
+                        `;
+                        todoList.appendChild(listItem);
+                        taskInput.value = '';
+                    }
+                });
+
+                todoList.addEventListener('click', function (event) {
+                    if (event.target.classList.contains('remove-button')) {
+                        const listItem = event.target.closest('li');
+                        listItem.remove();
+                        const task = listItem.querySelector('.taskText').innerText;
+                        fetch(`/remove/${encodeURIComponent(task)}`, { method: 'DELETE' });
+                    }
+                });
+            });
+        </script>
+    </div>
+    <%- include("partials/footer.ejs"); %>
+</body>
+</html>

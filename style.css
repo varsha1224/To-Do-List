@@ -1,0 +1,116 @@
+/* public/style.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FFF0F5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(300deg, #FFDBAA, #FFF0F5, #ef8172);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+h1 {
+    font-family: 'Abril Fatface', serif;
+    color: white;
+}
+
+.container {
+    height: 550px;
+    width: 400px;
+    background-color: #FBA1B7;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+    margin: 0px;
+    position: relative;
+    text-align: center;
+    overflow-y: auto;
+}
+
+form {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-form {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.todo-input {
+    font-family: 'IBM Plex Mono', monospace;
+    color: black;
+    border: none;
+    margin: 10px 10px;
+    width: 300px;
+    height: 60px;
+}
+
+.add-input {
+    background-color: #FFD1DA;
+    color: white;
+    font-size: 30px;
+    border: none;
+    width: 60px; /* Adjust the width as needed */
+    height: 60px;
+}
+
+.taskBox {
+    font-family: 'IBM Plex Mono', monospace;
+    color: black;
+    border: none;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.taskText {
+    flex: 1;
+}
+
+.remove-button {
+    background-color: #FFD1DA;
+    color: white;
+    font-size: 20px;
+    border: none;
+    width: 90px; /* Adjust the width as needed */
+    height: 40px;
+}
+
+footer {
+    color: #FF90BC;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
